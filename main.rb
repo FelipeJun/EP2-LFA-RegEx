@@ -59,21 +59,22 @@ def pessoasRegEx(frase)
 end
 
 def validateMonth(string)
+    string = string.downcase
     meses = {
-    1=>"Janeiro",
-    2=>"Fevereiro",
-    3=>"Março",
-    4=>"Abril",
-    5=>"Maio",
-    6=>"Junho",
-    7=>"Julho",
-    8=>"Agosto",
-    9=>"Setembro",
-    10=>"Outubro",
-    11=>"Novembro",
-    12=>"Dezembro"
+    1=>"janeiro",
+    2=>"fevereiro",
+    3=>"março",
+    4=>"abril",
+    5=>"maio",
+    6=>"junho",
+    7=>"julho",
+    8=>"agosto",
+    9=>"setembro",
+    10=>"outubro",
+    11=>"novembro",
+    12=>"dezembro"
 }
-    dia = string.match(/[1-9]{2}/).to_s
+    dia = string.match(/[0-9]{2}/).to_s
     mes = meses.index(string.match(/(?<= de\s)[a-zA-Z]+/).to_s)
     ano = string.match(/[0-9]{4}/).to_s
     # Caso for ex: 23 de fev, pega o ano atual, se não, ano dado
@@ -91,11 +92,11 @@ end
 # RegEx para pegar a data
 def dataRegEx(frase)
     # 10 de Janeiro de 2021
-    if(!!(frase =~ /[1-9]{2} de [a-zA-Z]+ de [0-9]{4}/i))
+    if(!!(frase =~ /[0-9]{2} de [a-zA-Z]+ de [0-9]{4}/i))
         regdata = frase.match(/[1-9]{2} de [a-zA-Z]+ de [0-9]{4}/).to_s
         data = validateMonth(regdata)
     # 10 de Janeiro
-    elsif(!!(frase =~ /([1-9]{2} de [a-zA-Z]+)/i))
+    elsif(!!(frase =~ /([0-9]{2} de [a-zA-Z]+)/i))
         regdata = frase.match(/([1-9]{2} de [a-zA-Z]+)/).to_s
         data = validateMonth(regdata)
     # Mostrar data de hoje
